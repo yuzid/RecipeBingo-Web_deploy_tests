@@ -1,4 +1,4 @@
-import { keysCollection } from '@/lib/firebase';
+import { keysCollection } from '../lib/firebase.js';
 import dotenv from 'dotenv';
 
 dotenv.config();

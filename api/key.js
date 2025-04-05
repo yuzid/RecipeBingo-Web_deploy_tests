@@ -1,4 +1,4 @@
-import { keysCollection } from '@/lib/firebase';
+import { keysCollection } from '../lib/firebase.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -31,7 +31,8 @@ export default async function handler(req, res) {
         const newQuota = quota - reductionAmount;
         await keysCollection.doc(doc.id).update({ quota: newQuota });
 
-        const envKeyName = 'PASS' + parseInt(doc.id.replace('pass', ''));
+        const index = parseInt(doc.id.replace('key', ''), 10);
+        const envKeyName = `PASS${index}`;
         const envKey = process.env[envKeyName];
 
         console.log(`${doc.id.toUpperCase()} QUOTA = ${newQuota}`);
