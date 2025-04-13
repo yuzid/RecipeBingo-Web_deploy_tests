@@ -14,14 +14,13 @@ const PORT = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve homepage
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Define API routes with '/api' prefix
-app.get('/api/key', keyHandler);     // now GET /api/key works
-app.get('/api/reset', resetHandler); // for resetting quota
+app.get('/api/key', keyHandler);     
+app.get('/api/reset', resetHandler); 
 
 
 app.listen(PORT, () => {

@@ -7,6 +7,7 @@ const reqType = [
   { code: 'DEFAULT', reduction: 1 },
   { code: 'SEARCH3', reduction: 1.03 },
   { code: 'SEARCH33', reduction:1.33 },
+  { code: 'NONE', reduction:0 },
   { code: 'REMOVE', reduction: 150 }
 ];
 
