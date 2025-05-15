@@ -9,7 +9,7 @@ const reqType = [
   { code: 'SEARCH33', reduction: 1.33 },
   { code: 'RECIPEID11', reduction: 1.1 },
   { code: 'NONE', reduction:0 },
-  { code: 'REMOVE', reduction: 150 }
+  { code: 'REMOVE', reduction: 0.1 }
 ];
 
 export default async function handler(req, res) {
@@ -31,7 +31,10 @@ export default async function handler(req, res) {
       const quota = data.quota;
 
       if (quota >= reductionAmount) {
-        const newQuota = quota - reductionAmount;
+        let newQuota = quota - reductionAmount;
+        if (reductionAmount = 0.1){
+          newQuota = 0
+        } 
         await keysCollection.doc(doc.id).update({ quota: newQuota });
 
         const index = parseInt(doc.id.replace('key', ''), 10);
