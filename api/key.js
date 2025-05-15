@@ -32,7 +32,7 @@ export default async function handler(req, res) {
 
       if (quota >= reductionAmount) {
         let newQuota = quota - reductionAmount;
-        if (reductionAmount = 0.1){
+        if (reductionAmount == 0.1){
           newQuota = 0
         } 
         await keysCollection.doc(doc.id).update({ quota: newQuota });
