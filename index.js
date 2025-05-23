@@ -29,12 +29,33 @@ app.get('/api/key', keyHandler);
 app.get('/api/reset', resetHandler); 
 app.get('/api/keyList', keyListHandler);
 
-app.get("/test",(req,res) => {
-    res.json({
-      "users" : ["userone","usertwo","usertri","userfor"] 
-    })
-})
+const keyToEnv = {
+  key01: 'PASS1',
+  key02: 'PASS2',
+  key03: 'PASS3',
+  key04: 'PASS4',
+  key05: 'PASS5',
+  key06: 'PASS6',
+  key07: 'PASS7',
+  key08: 'PASS8',
+  key09: 'PASS9',
+  key10: 'PASS10',
+};
 
+app.get('/api/key/:id', (req, res) => {
+  const id = req.params.id;
+  const envKey = keyToEnv[id];
+  if (!envKey) {
+    return res.status(404).json({ error: 'No mapping for this key ID' });
+  }
+
+  const value = process.env[envKey];
+  if (!value) {
+    return res.status(404).json({ error: 'Env variable not found' });
+  }
+
+  res.json({ value });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
