@@ -8,6 +8,7 @@ const corsOption = {
 };
 import keyHandler from './api/key.js';
 import resetHandler from './api/reset.js';
+import keyListHandler from './api/keyList.js';
 
 
 dotenv.config();
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 
 app.get('/api/key', keyHandler);     
 app.get('/api/reset', resetHandler); 
+app.get('/api/keyList', keyListHandler);
 
 app.get("/test",(req,res) => {
     res.json({
