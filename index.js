@@ -21,9 +21,7 @@ const __dirname = path.dirname(__filename);
 
 app.use(cors(corsOption));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
+
 
 app.get('/api/key', keyHandler);     
 app.get('/api/reset', resetHandler); 
@@ -55,6 +53,14 @@ app.get('/api/key/:id', (req, res) => {
   }
 
   res.json({ value });
+});
+
+// Serve static files dari React (dist)
+app.use(express.static(path.join(__dirname, './client/dist')));
+
+// Semua route lainnya kirim index.html (SPA)
+app.get(/(.*)/, (req, res) => {
+  res.sendFile(path.join(__dirname, './client/dist/index.html'));
 });
 
 app.listen(PORT, () => {
